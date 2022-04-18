@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  /* position: fixed; */
+  top: 0;
+  height: 3rem;
+  background-color: #007bff;
+  color: white;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+}
