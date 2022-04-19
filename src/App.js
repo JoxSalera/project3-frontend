@@ -1,9 +1,10 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
 import Itineraries from "./pages/Itineraries";
 import Profile from "./pages/Profile";
+import AddItinerary from "./components/AddItinerary";
+import OneItinerary from "./pages/OneItinerary";
 
 function App() {
   return (
@@ -11,9 +12,10 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/itineraries" element={<Itineraries />} />
+        <Route path="/" element={<Itineraries />} />
         <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/itineraries/:itineraryId" element={<OneItinerary />} />
+        <Route path="/new-itinerary" element={<AddItinerary />} />
       </Routes>
     </div>
   );
