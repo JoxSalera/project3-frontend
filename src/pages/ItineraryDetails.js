@@ -1,5 +1,5 @@
 import React from "react";
 
 export const ItineraryDetails = () => {
-  return <div>ItineraryDetails</div>;
+  return <div>ItineraryDetails ,</div>;
 };
