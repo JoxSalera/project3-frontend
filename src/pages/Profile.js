@@ -20,29 +20,27 @@ const Profile = () => {
     fetchUsers();
   }, []);
   if (!user) {
-    return <div>Loading</div>;
+    return <div>Loading...</div>;
   }
   return (
     <div>
-      <p> {user.username}</p>
-      <p>{itineraries[0].city}</p>
-      <p>{itineraries[0].name}</p>
-      <p>{JSON.stringify(itineraries[0].tags)}</p>
+      <p> Itineraries created by {user.username}</p>
 
       {itineraries.map((itinerary) => {
         return (
           <div className="ItineraryCard" key={itinerary._id}>
             <Link to={`/itineraries/${itinerary._id}`}>
-              <h3>{itinerary.name}</h3>
+              <img className="PreviewPic" src="/images/paris.jpg" alt="logo" />
             </Link>
-          </div>
-        );
-      })}
-
-      {itineraries[0].tags.map((itinerary) => {
-        return (
-          <div className="ItineraryCard" key={itinerary._id}>
-            <p>{itinerary.name}</p>
+            <h3>"{itinerary.name}"</h3>
+            <h3>{itinerary.city}</h3>
+            {itinerary.tags.map((tag) => {
+              return (
+                <div className="Tags" key={tag.name}>
+                  <p>#{tag.name}</p>
+                </div>
+              );
+            })}
           </div>
         );
       })}
