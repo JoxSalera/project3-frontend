@@ -11,7 +11,7 @@ const AddItinerary = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.setCurrentSports([...props.currentSports, inputData]);
+    // props.setCurrentSports([...props.currentSports, inputData]);
   }
 
   function handleChange(e) {
