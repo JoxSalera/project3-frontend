@@ -7,7 +7,7 @@ const service = axios.create({
 
 service.searchItineraries = async (q) => {
   try {
-    const { data } = await service.get(`/itineraries?q=${q}`);
+    const { data } = await service.get(`/itineraries?q=${q || ""}`);
     return data;
   } catch (err) {
     console.error(err);
