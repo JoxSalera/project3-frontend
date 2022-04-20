@@ -18,7 +18,8 @@ const Profile = () => {
       setUser(usersFetch.data.user);
     };
     fetchUsers();
-  }, []);
+  }, [userId]);
+
   if (!user) {
     return <div>Loading...</div>;
   }
@@ -44,6 +45,9 @@ const Profile = () => {
           </div>
         );
       })}
+      <Link to="/">
+        <button>Back to Itineraries</button>
+      </Link>
     </div>
   );
 };

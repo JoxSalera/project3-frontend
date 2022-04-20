@@ -1,7 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import { Link, useSearchParams } from "react-router-dom";
+
+import "../components/Itineraries.css";
+
 
 const API_ENDPOINT = "http://localhost:5005/api/itineraries";
 
@@ -13,9 +17,13 @@ const Itineraries = () => {
   useEffect(() => {
     const getItineraries = async () => {
       try {
+
         const q = searchParams.get("q");
         const { data } = await axios.get(`${API_ENDPOINT}?q=${q}`);
         console.log({ data });
+
+
+
         setItineraries(data);
       } catch (err) {
         console.error(err);
@@ -30,6 +38,13 @@ const Itineraries = () => {
         <Link to={`/itineraries/${itinerary._id}`}>
           <h3>{itinerary.name}</h3>
         </Link>
+        <p>
+          {itinerary.tags.map((tag) => {
+            <div className="tagsCard" key={tag._id}>
+              return <span>#{tag.name} </span>;
+            </div>;
+          })}
+        </p>
       </div>
     );
   });
