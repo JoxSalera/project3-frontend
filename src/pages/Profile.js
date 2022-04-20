@@ -11,8 +11,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       // Retrieving userId params from our backend
-      const { data } = await service.get(`
-       /profile/${userId}`);
+      const { data } = await service.get(`/profile/${userId}`);
       setItineraries(data.itineraries);
       setUser(data.user);
     };
