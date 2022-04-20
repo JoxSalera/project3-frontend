@@ -1,4 +1,4 @@
-import axios from "axios";
+import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
@@ -11,11 +11,10 @@ const Profile = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       // Retrieving userId params from our backend
-      const usersFetch = await axios.get(
-        `http://localhost:5005/api/profile/${userId}`
-      );
-      setItineraries(usersFetch.data.itineraries);
-      setUser(usersFetch.data.user);
+      const { data } = await service.get(`
+       /profile/${userId}`);
+      setItineraries(data.itineraries);
+      setUser(data.user);
     };
     fetchUsers();
   }, [userId]);

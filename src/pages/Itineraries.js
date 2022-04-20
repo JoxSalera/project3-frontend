@@ -1,13 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
-
 import { Link, useSearchParams } from "react-router-dom";
-
+import service from "../api/apiHandler";
 import "../components/Itineraries.css";
-
-
-const API_ENDPOINT = "http://localhost:5005/api/itineraries";
 
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);
@@ -19,11 +14,8 @@ const Itineraries = () => {
       try {
 
         const q = searchParams.get("q");
-        const { data } = await axios.get(`${API_ENDPOINT}?q=${q}`);
-        console.log({ data });
-
-
-
+        const data = await service.searchItineraries(q);
+        console.log(data);
         setItineraries(data);
       } catch (err) {
         console.error(err);
