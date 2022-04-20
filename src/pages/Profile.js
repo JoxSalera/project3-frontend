@@ -2,7 +2,7 @@ import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
-const Profile = () => {
+const Profile = (props) => {
   // The "{ userId }" must match with name of const variable defined in backend routes ("profile.routes.js")
   const { userId } = useParams();
   const [user, setUser] = useState();
@@ -15,7 +15,16 @@ const Profile = () => {
       setItineraries(data.itineraries);
       setUser(data.user);
     };
-    fetchUsers();
+    const fetchProfile = async () => {
+      const { data } = await service.get(`/profile`);
+      setItineraries(data.userItinerary);
+      setUser(data.user);
+    };
+    if (props.self) {
+      fetchProfile();
+    } else {
+      fetchUsers();
+    }
   }, [userId]);
 
   if (!user) {

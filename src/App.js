@@ -12,7 +12,6 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Itineraries />} />
         <Route path="/profile/:userId" element={<Profile />} />
@@ -22,6 +21,7 @@ function App() {
           path="/edit-itinerary/:itineraryId"
           element={<EditItinerary />}
         />
+        <Route path="/profile" element={<Profile self={true} />} />
       </Routes>
     </div>
   );
