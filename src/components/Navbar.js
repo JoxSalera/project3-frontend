@@ -1,17 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css";
+import "../App.css";
 
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar">
+      <nav>
         <Link className="homepage" to="/">
-          HOME
+          ITINERARIES
         </Link>
-        <div>
+        <div className="search">
           <input placeholder="Search location"></input>
         </div>
-        <Link className="profile" to="/profile">
+        <Link className="homepage" to="/profile">
           PROFILE
         </Link>
       </nav>

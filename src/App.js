@@ -5,6 +5,7 @@ import Itineraries from "./pages/Itineraries";
 import Profile from "./pages/Profile";
 import AddItinerary from "./components/AddItinerary";
 import OneItinerary from "./pages/OneItinerary";
+// import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Itineraries />} />
         <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/itineraries/:itineraryId" element={<OneItinerary />} />
+        <Route path="itineraries/:itineraryId" element={<OneItinerary />} />
         <Route path="/new-itinerary" element={<AddItinerary />} />
       </Routes>
     </div>

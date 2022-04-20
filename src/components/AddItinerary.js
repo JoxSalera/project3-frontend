@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-const AddItinerary = (props) => {
+const API_ENDPOINT = "http://localhost:5005/api/tags";
+
+const AddItinerary = () => {
   const [inputData, setInputData] = useState({
-    title: "",
+    name: "",
     city: "",
-    creator: "",
     image: "",
     tags: "",
   });
 
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    const getTags = async () => {
+      try {
+        const { data } = await axios.get(`${API_ENDPOINT}`);
+        setTags(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getTags();
+  }, []);
+
   function handleSubmit(e) {
     e.preventDefault();
-    props.setCurrentSports([...props.currentSports, inputData]);
   }
 
   function handleChange(e) {
@@ -26,8 +41,8 @@ const AddItinerary = (props) => {
       <form onSubmit={handleSubmit} onChange={handleChange}>
         <input
           type="text"
-          value={inputData.title}
-          id="title"
+          value={inputData.name}
+          id="name"
           placeholder="title"
         />
         <input
@@ -38,22 +53,18 @@ const AddItinerary = (props) => {
         />
         <input
           type="text"
-          value={inputData.creator}
-          id="creator"
-          placeholder="creator"
-        />
-        <input
-          type="text"
           value={inputData.image}
           id="image"
           placeholder="image"
         />
-        <input
-          value={inputData.tags}
-          id="tags"
-          type="text"
-          placeholder="tags"
-        />
+
+        <select value={inputData.tags} name="tags" id="tags">
+          {tags.map((tag) => (
+            <option value={tag._id} key={tag._id}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
         <button>Submit</button>
       </form>
     </>

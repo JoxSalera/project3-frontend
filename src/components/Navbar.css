@@ -1,12 +1,21 @@
-.navbar {
+nav {
   display: flex;
   flex-direction: row;
-  position: fixed;
-  top: 0;
-  height: 3rem;
   background-color: #e09327;
   width: 100%;
   font-size: 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.homepage {
+  color: white;
+  text-decoration: none;
+  margin: 1.5rem;
+}
+
+.search {
+  margin: 1.5rem;
 }
 
 @media (max-width: 414px) {
@@ -25,8 +34,4 @@
 .navbar-link {
   color: white;
   text-decoration: none;
-}
-
-.PreviewPic {
-  width: 100px;
 }
