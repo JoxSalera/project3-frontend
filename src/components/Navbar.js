@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   return (
@@ -8,9 +9,7 @@ const Navbar = () => {
         <Link className="homepage" to="/">
           HOME
         </Link>
-        <div>
-          <input placeholder="Search location"></input>
-        </div>
+        <SearchBar />
         <Link className="profile" to="/profile">
           PROFILE
         </Link>
