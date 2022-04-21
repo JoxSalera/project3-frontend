@@ -12,7 +12,7 @@ const ItineraryOne = () => {
   useEffect(() => {
     const getItinerary = async () => {
       try {
-        const { data } = await axios.get(`${API_ENDPOINT}/${itineraryId}`);
+        const { data } = await service.get(`/itinerary/${itineraryId}`);
         setItineraryItem(data.itineraryDetails);
         console.log(data);
         setItinerary(data.itinerary);

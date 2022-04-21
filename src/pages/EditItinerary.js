@@ -77,84 +77,81 @@ const EditItinerary = () => {
         items: reformatItems(JSON.parse(JSON.stringify(items))),
       };
       console.log(itineraryToEdit, "heeeeeeeeeey");
+
       const { data, status } = await service.put(
         `/edit-itinerary/${itineraryId}`,
         itineraryToEdit
-      const itineraryToCreate = { ...inputData, items: items };
-      const { data, status } = await service.post(
-        "new-itinerary",
-        itineraryToCreate
       );
       if (status === 201) {
         console.log("Navigate");
-        navigate(`/itineraries/${data.newItinerary._id}`);
+        navigate(`/itineraries/${itineraryId}`);
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-
   function handleChange(e) {
     if (e.target.name) {
       setInputData({ ...inputData, [e.target.name]: e.target.value });
     }
-  const addItemForm = (e) => {
-    // e.preventDefault();
-    // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
-  };
+    const addItemForm = (e) => {
+      // e.preventDefault();
+      // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
+    };
 
-  return (
-    <>
-      <div>
-        <h1>Edit Itinerary</h1>
-      </div>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <span>Itinerary Name: </span>
-        <input
-          type="text"
-          value={inputData.name}
-          name="name"
-          placeholder="title"
-        />
-        <br />
-        <span>City: </span>
-        <input
-          type="text"
-          value={inputData.city}
-          name="city"
-          placeholder="city"
-        />
-        <br />
-        <span>Picture: </span>
-        <input
-          type="text"
-          value={inputData.image}
-          name="image"
-          placeholder="image"
-        />
-        <br />
-        <span>Tags: </span>
-        <select value={inputData.tags} name="tags" id="tags">
-          {tags.map((tag) => (
-            <option value={tag._id} key={tag._id}>
-              {tag.name}
-            </option>
-          ))}
-        </select>
-        <br />
-        <br />
-
+    return (
+      <>
         <div>
-          {items.map((item, index) => (
-            <EditItem items={items} setItems={setItems} index={index} />
-          ))}
+          <h1>Edit Itinerary</h1>
         </div>
-        {/* <button onClick={addItemForm}>Add Item</button> */}
-        <button type="submit">Edit</button>
-      </form>
-    </>
-  );
+        <form onSubmit={handleSubmit} onChange={handleChange}>
+          <span>Itinerary Name: </span>
+          <input
+            type="text"
+            value={inputData.name}
+            name="name"
+            placeholder="title"
+          />
+          <br />
+          <span>City: </span>
+          <input
+            type="text"
+            value={inputData.city}
+            name="city"
+            placeholder="city"
+          />
+          <br />
+          <span>Picture: </span>
+          <input
+            type="text"
+            value={inputData.image}
+            name="image"
+            placeholder="image"
+          />
+          <br />
+          <span>Tags: </span>
+          <select value={inputData.tags} name="tags" id="tags">
+            {tags.map((tag) => (
+              <option value={tag._id} key={tag._id}>
+                {tag.name}
+              </option>
+            ))}
+          </select>
+          <br />
+          <br />
+
+          <div>
+            {items.map((item, index) => (
+              <EditItem items={items} setItems={setItems} index={index} />
+            ))}
+          </div>
+          {/* <button onClick={addItemForm}>Add Item</button> */}
+          <button type="submit">Edit</button>
+        </form>
+      </>
+    );
+  }
 };
 
 export default EditItinerary;
