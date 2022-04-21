@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import CreateItem from "../components/CreateItem";
+import EditItem from "../components/EditItem";
 
-const CreateItinerary = () => {
+const EditItinerary = () => {
+  const { itineraryId } = useParams();
   const navigate = useNavigate();
-
-  // STATES --------------------------------------------------------
 
   const itemTemplate = {
     name: "",
     description: "",
-    street: "",
-    streetNumber: 0,
-    postCode: "",
+    address: "",
     picture: "",
   };
 
@@ -28,7 +25,18 @@ const CreateItinerary = () => {
 
   const [tags, setTags] = useState([]);
 
-  // useEffects --------------------------------------------------------
+  useEffect(() => {
+    const getItinerary = async () => {
+      try {
+        const { data } = await service.get(`/itinerary/${itineraryId}`);
+        setInputData(data.itinerary);
+        setItems(data.itineraryDetails || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getItinerary();
+  }, [itineraryId]);
 
   useEffect(() => {
     const getTags = async () => {
@@ -42,32 +50,10 @@ const CreateItinerary = () => {
     getTags();
   }, []);
 
-  // reformatting function for the items ----------------------------
-
-  const reformatItems = (unformattedItems) => {
-    const formattedItems = unformattedItems.map((item) => {
-      const formattedItem = {
-        name: item.name,
-        description: item.description,
-        picture: item.picture,
-        address: {
-          street: item.street,
-          streetNumber: item.streetNumber,
-          postCode: item.postCode,
-        },
-      };
-      return formattedItem;
-    });
-    return formattedItems;
-  };
-
-  // handle functions -----------------------------------------------
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formattedItems = reformatItems(JSON.parse(JSON.stringify(items)));
-      const itineraryToCreate = { ...inputData, items: formattedItems };
+      const itineraryToCreate = { ...inputData, items: items };
       const { data, status } = await service.post(
         "new-itinerary",
         itineraryToCreate
@@ -82,41 +68,47 @@ const CreateItinerary = () => {
   };
 
   const addItemForm = (e) => {
-    e.preventDefault();
-    if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
+    // e.preventDefault();
+    // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
   };
 
   function handleChange(e) {
-    if (e.target.name) {
-      setInputData({ ...inputData, [e.target.name]: e.target.value });
-    }
+    // if (e.target.name) {
+    //   setInputData({ ...inputData, [e.target.name]: e.target.value });
+    // }
   }
 
   return (
     <>
       <div>
-        <h1>New Itinerary</h1>
+        <h1>Edit Itinerary</h1>
       </div>
       <form onSubmit={handleSubmit} onChange={handleChange}>
+        <span>Itinerary Name: </span>
         <input
           type="text"
           value={inputData.name}
           name="name"
           placeholder="title"
         />
+        <br />
+        <span>City: </span>
         <input
           type="text"
           value={inputData.city}
           name="city"
           placeholder="city"
         />
+        <br />
+        <span>Picture: </span>
         <input
           type="text"
           value={inputData.image}
           name="image"
           placeholder="image"
         />
-
+        <br />
+        <span>Tags: </span>
         <select value={inputData.tags} name="tags" id="tags">
           {tags.map((tag) => (
             <option value={tag._id} key={tag._id}>
@@ -124,16 +116,19 @@ const CreateItinerary = () => {
             </option>
           ))}
         </select>
+        <br />
+        <br />
+
         <div>
           {items.map((item, index) => (
-            <CreateItem items={items} setItems={setItems} index={index} />
+            <EditItem items={items} setItems={setItems} index={index} />
           ))}
         </div>
         <button onClick={addItemForm}>Add Item</button>
-        <button type="submit">Submit</button>
+        <button type="submit">Edit</button>
       </form>
     </>
   );
 };
 
-export default CreateItinerary;
+export default EditItinerary;
