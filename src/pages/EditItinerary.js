@@ -10,7 +10,9 @@ const EditItinerary = () => {
   const itemTemplate = {
     name: "",
     description: "",
-    address: "",
+    street: "",
+    streetNumber: 0,
+    postCode: "",
     picture: "",
   };
 
@@ -25,6 +27,23 @@ const EditItinerary = () => {
 
   const [tags, setTags] = useState([]);
 
+  const reformatItems = (unformattedItems) => {
+    const formattedItems = unformattedItems.map((item) => {
+      const formattedItem = {
+        _id: item._id,
+        name: item.name,
+        description: item.description,
+        picture: item.picture,
+        address: {
+          street: item.street,
+          streetNumber: item.streetNumber,
+          postCode: item.postCode,
+        },
+      };
+      return formattedItem;
+    });
+    return formattedItems;
+  };
   useEffect(() => {
     const getItinerary = async () => {
       try {
@@ -53,6 +72,14 @@ const EditItinerary = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const itineraryToEdit = {
+        ...inputData,
+        items: reformatItems(JSON.parse(JSON.stringify(items))),
+      };
+      console.log(itineraryToEdit, "heeeeeeeeeey");
+      const { data, status } = await service.put(
+        `/edit-itinerary/${itineraryId}`,
+        itineraryToEdit
       const itineraryToCreate = { ...inputData, items: items };
       const { data, status } = await service.post(
         "new-itinerary",
@@ -67,16 +94,15 @@ const EditItinerary = () => {
     }
   };
 
+
+  function handleChange(e) {
+    if (e.target.name) {
+      setInputData({ ...inputData, [e.target.name]: e.target.value });
+    }
   const addItemForm = (e) => {
     // e.preventDefault();
     // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
   };
-
-  function handleChange(e) {
-    // if (e.target.name) {
-    //   setInputData({ ...inputData, [e.target.name]: e.target.value });
-    // }
-  }
 
   return (
     <>
@@ -124,7 +150,7 @@ const EditItinerary = () => {
             <EditItem items={items} setItems={setItems} index={index} />
           ))}
         </div>
-        <button onClick={addItemForm}>Add Item</button>
+        {/* <button onClick={addItemForm}>Add Item</button> */}
         <button type="submit">Edit</button>
       </form>
     </>

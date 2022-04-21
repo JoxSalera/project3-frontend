@@ -25,11 +25,26 @@ const CreateItem = (props) => {
           id="description"
           placeholder="description"
         />
+        <span>Address: </span>
         <input
           type="text"
-          value={props.items[props.index].address}
-          id="address"
-          placeholder="address"
+          value={props.items[props.index].street}
+          id="street"
+          placeholder="street"
+        />
+        <br />
+        <input
+          type="text"
+          value={props.items[props.index].streetNumber}
+          id="streetNumber"
+          placeholder="streetNumber"
+        />
+        <br />
+        <input
+          type="text"
+          value={props.items[props.index].postCode}
+          id="postCode"
+          placeholder="postCode"
         />
         <input
           type="text"

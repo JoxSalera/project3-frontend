@@ -13,7 +13,6 @@ const Itineraries = () => {
       try {
         const q = searchParams.get("q");
         const data = await service.searchItineraries(q);
-        console.log("the data i get from searchItineraries is ", data);
         setItineraries(data);
       } catch (err) {
         console.error(err);

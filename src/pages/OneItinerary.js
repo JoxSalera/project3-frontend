@@ -12,7 +12,7 @@ const ItineraryOne = () => {
   useEffect(() => {
     const getItinerary = async () => {
       try {
-        const { data } = await service.get(`/itinerary/${itineraryId}`);
+        const { data } = await axios.get(`${API_ENDPOINT}/${itineraryId}`);
         setItineraryItem(data.itineraryDetails);
         console.log(data);
         setItinerary(data.itinerary);
@@ -54,6 +54,9 @@ const ItineraryOne = () => {
       </p>
       <Link to="/">
         <button>Back to Itineraries</button>
+      </Link>
+      <Link to={`/edit-itinerary/${itineraryId}`}>
+        <button>Edit</button>
       </Link>
     </div>
   );
