@@ -7,14 +7,15 @@ import "../components/Itineraries.css";
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);
   const [searchParams] = useSearchParams();
-  console.log(searchParams.get("q"));
+  // console.log(searchParams.get("q"));
 
   useEffect(() => {
     const getItineraries = async () => {
       try {
+        console.log("trying to get itineraries");
         const q = searchParams.get("q");
         const data = await service.searchItineraries(q);
-        console.log(data);
+        console.log("the data i get from searchItineraries is ", data);
         setItineraries(data);
       } catch (err) {
         console.error(err);
