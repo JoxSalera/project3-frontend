@@ -1,14 +1,12 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import service from "../api/apiHandler";
 import "./Itineraries.css";
-import { AuthContext } from "../context/auth.context";
 
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);
   const [searchParams] = useSearchParams();
-  const { logOutUser, isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     const getItineraries = async () => {
@@ -47,11 +45,7 @@ const Itineraries = () => {
     <div className="ItinerariesList">
       <h1>Itineraries</h1>
       {allItineraries}
-      {isLoggedIn && (
-        <>
-          <button onClick={logOutUser}>Log out</button>
-        </>
-      )}
+
       <Link to="/new-itinerary">
         <button>Create a new Itinerary</button>
       </Link>
