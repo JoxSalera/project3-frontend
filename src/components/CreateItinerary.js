@@ -23,10 +23,9 @@ const CreateItinerary = () => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    console.log("in useEffect before request the tags are ", tags);
     const getTags = async () => {
       try {
-        const { data } = await service.get("tags");
+        const { data } = await service.get("/tags");
         console.log(
           "The data I am getting for tags after destructuring through the service.get is ",
           data
