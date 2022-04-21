@@ -2,20 +2,39 @@ import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
-const Profile = () => {
+const Profile = (props) => {
   // The "{ userId }" must match with name of const variable defined in backend routes ("profile.routes.js")
   const { userId } = useParams();
   const [user, setUser] = useState();
   const [itineraries, setItineraries] = useState();
+  const storedToken = localStorage.getItem("authToken");
 
   useEffect(() => {
     const fetchUsers = async () => {
-      // Retrieving userId params from our backend
-      const { data } = await service.get(`/profile/${userId}`);
-      setItineraries(data.itineraries);
+      try {
+        // manually sending token to backend
+        // Retrieving userId params from our backend
+        const { data } = await service.get(`/profile/${userId}`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        setItineraries(data.itineraries);
+        setUser(data.user);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    const fetchProfile = async () => {
+      const { data } = await service.get(`/profile`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      });
+      setItineraries(data.userItinerary);
       setUser(data.user);
     };
-    fetchUsers();
+    if (props.self) {
+      fetchProfile();
+    } else {
+      fetchUsers();
+    }
   }, [userId]);
 
   if (!user) {

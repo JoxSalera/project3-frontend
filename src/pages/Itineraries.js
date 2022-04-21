@@ -2,17 +2,15 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import "../pages/Itineraries.css";
+import "./Itineraries.css";
 
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);
   const [searchParams] = useSearchParams();
-  // console.log(searchParams.get("q"));
 
   useEffect(() => {
     const getItineraries = async () => {
       try {
-        console.log("trying to get itineraries");
         const q = searchParams.get("q");
         const data = await service.searchItineraries(q);
         setItineraries(data);
@@ -46,6 +44,7 @@ const Itineraries = () => {
     <div className="ItinerariesList">
       <h1>Itineraries</h1>
       {allItineraries}
+
       <Link to="/new-itinerary">
         <button>Create a new Itinerary</button>
       </Link>

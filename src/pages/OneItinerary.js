@@ -1,9 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import service from "../api/apiHandler";
 import { Link, useParams } from "react-router-dom";
-
-const API_ENDPOINT = "http://localhost:5005/api/itinerary";
 
 const ItineraryOne = () => {
   const [itineraryItem, setItineraryItem] = useState([]);
