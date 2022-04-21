@@ -1,10 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import axios from "axios";
-import service from "../api/apiHandler";
+import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
-// const API_ENDPOINT = "http://localhost:5005/api/itinerary";
+const API_ENDPOINT = "http://localhost:5005/api/itinerary";
 
 const ItineraryOne = () => {
   const [itineraryItem, setItineraryItem] = useState([]);
@@ -15,7 +14,7 @@ const ItineraryOne = () => {
   useEffect(() => {
     const getItinerary = async () => {
       try {
-        const { data } = await service.get(`/itinerary/${itineraryId}`);
+        const { data } = await axios.get(`${API_ENDPOINT}/${itineraryId}`);
         setItineraryItem(data.itineraryDetails);
         console.log(data);
         setItinerary(data.itinerary);
@@ -57,6 +56,9 @@ const ItineraryOne = () => {
       </p>
       <Link to="/">
         <button>Back to Itineraries</button>
+      </Link>
+      <Link to={`/edit-itinerary/${itineraryId}`}>
+        <button>Edit</button>
       </Link>
     </div>
   );
