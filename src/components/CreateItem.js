@@ -10,7 +10,7 @@ const CreateItem = (props) => {
   return (
     <>
       <div>
-        <h3>New Item</h3>
+        <h3>Add an activity</h3>
       </div>
       <form onChange={handleChange}>
         <input
@@ -23,34 +23,34 @@ const CreateItem = (props) => {
           type="text"
           value={props.items[props.index].description}
           id="description"
-          placeholder="description"
+          placeholder="Description of your activity"
         />
         <span>Address: </span>
         <input
           type="text"
           value={props.items[props.index].street}
           id="street"
-          placeholder="street"
+          placeholder="Street"
         />
         <br />
         <input
           type="text"
           value={props.items[props.index].streetNumber}
           id="streetNumber"
-          placeholder="streetNumber"
+          placeholder="Street number"
         />
         <br />
         <input
           type="text"
           value={props.items[props.index].postCode}
           id="postCode"
-          placeholder="postCode"
+          placeholder="Postal code"
         />
         <input
           type="text"
           value={props.items[props.index].picture}
           id="picture"
-          placeholder="image"
+          placeholder="Add an image"
         />
       </form>
     </>
