@@ -10,7 +10,9 @@ const EditItinerary = () => {
   const itemTemplate = {
     name: "",
     description: "",
-    address: "",
+    street: "",
+    streetNumber: 0,
+    postCode: "",
     picture: "",
   };
 
@@ -24,6 +26,24 @@ const EditItinerary = () => {
   const [items, setItems] = useState([{ ...itemTemplate }]);
 
   const [tags, setTags] = useState([]);
+
+  const reformatItems = (unformattedItems) => {
+    const formattedItems = unformattedItems.map((item) => {
+      const formattedItem = {
+        _id: item._id,
+        name: item.name,
+        description: item.description,
+        picture: item.picture,
+        address: {
+          street: item.street,
+          streetNumber: item.streetNumber,
+          postCode: item.postCode,
+        },
+      };
+      return formattedItem;
+    });
+    return formattedItems;
+  };
 
   useEffect(() => {
     const getItinerary = async () => {
@@ -53,10 +73,14 @@ const EditItinerary = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const itineraryToCreate = { ...inputData, items: items };
-      const { data, status } = await service.post(
-        "new-itinerary",
-        itineraryToCreate
+      const itineraryToEdit = {
+        ...inputData,
+        items: reformatItems(JSON.parse(JSON.stringify(items))),
+      };
+      console.log(itineraryToEdit, "heeeeeeeeeey");
+      const { data, status } = await service.put(
+        `/edit-itinerary/${itineraryId}`,
+        itineraryToEdit
       );
       if (status === 201) {
         console.log("Navigate");
@@ -67,15 +91,10 @@ const EditItinerary = () => {
     }
   };
 
-  const addItemForm = (e) => {
-    // e.preventDefault();
-    // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
-  };
-
   function handleChange(e) {
-    // if (e.target.name) {
-    //   setInputData({ ...inputData, [e.target.name]: e.target.value });
-    // }
+    if (e.target.name) {
+      setInputData({ ...inputData, [e.target.name]: e.target.value });
+    }
   }
 
   return (
@@ -109,7 +128,7 @@ const EditItinerary = () => {
         />
         <br />
         <span>Tags: </span>
-        <select value={inputData.tags} name="tags" id="tags">
+        <select multiple value={inputData.tags} name="tags" id="tags">
           {tags.map((tag) => (
             <option value={tag._id} key={tag._id}>
               {tag.name}
@@ -124,7 +143,7 @@ const EditItinerary = () => {
             <EditItem items={items} setItems={setItems} index={index} />
           ))}
         </div>
-        <button onClick={addItemForm}>Add Item</button>
+        {/* <button onClick={addItemForm}>Add Item</button> */}
         <button type="submit">Edit</button>
       </form>
     </>

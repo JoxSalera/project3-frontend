@@ -28,21 +28,21 @@ const CreateItem = (props) => {
         <span>Address: </span>
         <input
           type="text"
-          value={props.items[props.index].address.street}
+          value={props.items[props.index].street}
           id="street"
           placeholder="street"
         />
         <br />
         <input
           type="text"
-          value={props.items[props.index].address.streetNumber}
+          value={props.items[props.index].streetNumber}
           id="streetNumber"
           placeholder="streetNumber"
         />
         <br />
         <input
           type="text"
-          value={props.items[props.index].address.postCode}
+          value={props.items[props.index].postCode}
           id="postCode"
           placeholder="postCode"
         />

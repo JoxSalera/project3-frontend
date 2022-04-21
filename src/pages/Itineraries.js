@@ -15,7 +15,6 @@ const Itineraries = () => {
         console.log("trying to get itineraries");
         const q = searchParams.get("q");
         const data = await service.searchItineraries(q);
-        console.log("the data i get from searchItineraries is ", data);
         setItineraries(data);
       } catch (err) {
         console.error(err);
@@ -34,7 +33,7 @@ const Itineraries = () => {
           {itinerary.tags.map((tag) => {
             return (
               <div className="tagsCard" key={tag._id}>
-                return <span>#{tag.name} </span>;
+                <span>#{tag.name} </span>
               </div>
             );
           })}
