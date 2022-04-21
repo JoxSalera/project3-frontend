@@ -7,7 +7,6 @@ const AuthContext = createContext();
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [isAdmin, setIsAdmin] = useState(true);
   const [user, setUser] = useState(null);
 
   /* 
@@ -30,7 +29,7 @@ function AuthProviderWrapper(props) {
     if (storedToken) {
       // We must send the JWT token in the request's "Authorization" Headers
       axios
-        .get(`${API_URL}/auth/verify`, {
+        .get(`${API_URL}/api/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
@@ -40,9 +39,7 @@ function AuthProviderWrapper(props) {
           const user = response.data;
           // Update state variables
           setIsLoggedIn(true);
-          if (user.roles?.admin) {
-            setIsAdmin(true);
-          }
+
           setIsLoading(false);
           setUser(user);
         })

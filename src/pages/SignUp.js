@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:5005";
+const API_URL = "http://localhost:5005/api";
 
 const SignUp = () => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -15,11 +16,12 @@ const SignUp = () => {
   const handleUsername = (e) => setUsername(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
+  const handleName = (e) => setName(e.target.value);
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     // Create an object representing the request body
-    const requestBody = { username, password, email };
+    const requestBody = { username, password, email, name };
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -27,7 +29,7 @@ const SignUp = () => {
     axios
       .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        navigate("/auth/login");
+        navigate("/login");
       })
       .catch((error) => {
         console.log(error);
@@ -41,6 +43,9 @@ const SignUp = () => {
       <h1>Sign Up</h1>
 
       <form onSubmit={handleSignupSubmit}>
+        <label>Name:</label>
+        <input type="text" name="name" value={name} onChange={handleName} />
+
         <label>Username:</label>
         <input
           type="text"
@@ -65,8 +70,8 @@ const SignUp = () => {
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to={"/auth/login"}> Login</Link>
+      <p>Already have an account?</p>
+      <Link to={"/login"}> Login</Link>
     </div>
   );
 };

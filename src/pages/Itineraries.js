@@ -1,18 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import "../pages/Itineraries.css";
+import "./Itineraries.css";
+import { AuthContext } from "../context/auth.context";
 
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);
   const [searchParams] = useSearchParams();
-  // console.log(searchParams.get("q"));
+  const { logOutUser, isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     const getItineraries = async () => {
       try {
-        console.log("trying to get itineraries");
         const q = searchParams.get("q");
         const data = await service.searchItineraries(q);
         console.log("the data i get from searchItineraries is ", data);
@@ -47,6 +47,11 @@ const Itineraries = () => {
     <div className="ItinerariesList">
       <h1>Itineraries</h1>
       {allItineraries}
+      {isLoggedIn && (
+        <>
+          <button onClick={logOutUser}>Log out</button>
+        </>
+      )}
       <Link to="/new-itinerary">
         <button>Create a new Itinerary</button>
       </Link>

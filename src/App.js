@@ -6,7 +6,10 @@ import Profile from "./pages/Profile";
 import CreateItinerary from "./pages/CreateItinerary";
 import EditItinerary from "./pages/EditItinerary";
 import OneItinerary from "./pages/OneItinerary";
-// import Layout from "./components/Layout";
+import SignUp from "./pages/SignUp";
+import LogIn from "./pages/LogIn";
+import IsPrivate from "./components/IsPrivate";
+import IsAnonymous from "./components/IsAnonymous";
 
 function App() {
   return (
@@ -16,12 +19,35 @@ function App() {
         <Route path="/" element={<Itineraries />} />
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/itineraries/:itineraryId" element={<OneItinerary />} />
-        <Route path="/new-itinerary" element={<CreateItinerary />} />
         <Route
           path="/edit-itinerary/:itineraryId"
           element={<EditItinerary />}
         />
-        <Route path="/profile" element={<Profile self={true} />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route
+          path="/login"
+          element={
+            <IsAnonymous>
+              <LogIn />
+            </IsAnonymous>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <IsPrivate>
+              <Profile self={true} />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/new-itinerary"
+          element={
+            <IsPrivate>
+              <CreateItinerary />
+            </IsPrivate>
+          }
+        />
       </Routes>
     </div>
   );

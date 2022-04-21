@@ -7,16 +7,26 @@ const Profile = (props) => {
   const { userId } = useParams();
   const [user, setUser] = useState();
   const [itineraries, setItineraries] = useState();
+  const storedToken = localStorage.getItem("authToken");
 
   useEffect(() => {
     const fetchUsers = async () => {
-      // Retrieving userId params from our backend
-      const { data } = await service.get(`/profile/${userId}`);
-      setItineraries(data.itineraries);
-      setUser(data.user);
+      try {
+        // manually sending token to backend
+        // Retrieving userId params from our backend
+        const { data } = await service.get(`/profile/${userId}`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        setItineraries(data.itineraries);
+        setUser(data.user);
+      } catch (err) {
+        console.log(err);
+      }
     };
     const fetchProfile = async () => {
-      const { data } = await service.get(`/profile`);
+      const { data } = await service.get(`/profile`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      });
       setItineraries(data.userItinerary);
       setUser(data.user);
     };
