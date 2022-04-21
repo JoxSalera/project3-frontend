@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import "../components/Itineraries.css";
+import "../pages/Itineraries.css";
 
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);

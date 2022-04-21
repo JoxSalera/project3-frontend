@@ -44,7 +44,6 @@ const EditItinerary = () => {
     });
     return formattedItems;
   };
-
   useEffect(() => {
     const getItinerary = async () => {
       try {
@@ -81,6 +80,10 @@ const EditItinerary = () => {
       const { data, status } = await service.put(
         `/edit-itinerary/${itineraryId}`,
         itineraryToEdit
+      const itineraryToCreate = { ...inputData, items: items };
+      const { data, status } = await service.post(
+        "new-itinerary",
+        itineraryToCreate
       );
       if (status === 201) {
         console.log("Navigate");
@@ -91,11 +94,15 @@ const EditItinerary = () => {
     }
   };
 
+
   function handleChange(e) {
     if (e.target.name) {
       setInputData({ ...inputData, [e.target.name]: e.target.value });
     }
-  }
+  const addItemForm = (e) => {
+    // e.preventDefault();
+    // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
+  };
 
   return (
     <>
@@ -128,7 +135,7 @@ const EditItinerary = () => {
         />
         <br />
         <span>Tags: </span>
-        <select multiple value={inputData.tags} name="tags" id="tags">
+        <select value={inputData.tags} name="tags" id="tags">
           {tags.map((tag) => (
             <option value={tag._id} key={tag._id}>
               {tag.name}

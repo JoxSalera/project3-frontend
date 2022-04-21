@@ -117,7 +117,7 @@ const CreateItinerary = () => {
           placeholder="image"
         />
 
-        <select multiple value={inputData.tags} name="tags" id="tags">
+        <select value={inputData.tags} name="tags" id="tags">
           {tags.map((tag) => (
             <option value={tag._id} key={tag._id}>
               {tag.name}

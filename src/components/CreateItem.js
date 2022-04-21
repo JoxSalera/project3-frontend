@@ -23,7 +23,7 @@ const CreateItem = (props) => {
           type="text"
           value={props.items[props.index].description}
           id="description"
-          placeholder="Description"
+          placeholder="description"
         />
         <span>Address: </span>
         <input
