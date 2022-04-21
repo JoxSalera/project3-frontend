@@ -2,12 +2,19 @@ import React from "react";
 import { useState, useEffect } from "react";
 import service from "../api/apiHandler";
 import { Link, useParams } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ItineraryOne = () => {
   const [itineraryItem, setItineraryItem] = useState([]);
   const [itinerary, setItinerary] = useState({});
 
   const { itineraryId } = useParams();
+
+  // AOS style
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   useEffect(() => {
     const getItinerary = async () => {
@@ -43,7 +50,7 @@ const ItineraryOne = () => {
     : null;
 
   return (
-    <div>
+    <div data-aos="fade-left">
       {item}
       {tags}
       <p>
@@ -55,9 +62,9 @@ const ItineraryOne = () => {
       <Link to="/">
         <button>Back to Itineraries</button>
       </Link>
-      <Link to={`/edit-itinerary/${itineraryId}`}>
+      {/* <Link to={`/edit-itinerary/${itineraryId}`}>
         <button>Edit</button>
-      </Link>
+      </Link> */}
     </div>
   );
 };
