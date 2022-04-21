@@ -50,9 +50,9 @@ const Profile = (props) => {
             <Link to={`/itineraries/${itinerary._id}`}>
               <img className="PreviewPic" src="/images/paris.jpg" alt="logo" />
             </Link>
-            <Link to={`/edit-itinerary/${itinerary._id}`}>
+            {/* <Link to={`/edit-itinerary/${itinerary._id}`}>
               <button>Edit</button>
-            </Link>
+            </Link> */}
             <h3>"{itinerary.name}"</h3>
             <h3>{itinerary.city}</h3>
             {itinerary.tags.map((tag) => {

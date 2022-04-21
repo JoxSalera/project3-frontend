@@ -13,12 +13,12 @@ const Navbar = () => {
   return (
     <div>
       <nav>
-        <Link className="homepage" to="/">
+        <Link className="navItems" to="/">
           Itin' Express
         </Link>
 
         <SearchBar />
-        <Link className="profile" to="/profile">
+        <Link className="navItems" to="/profile">
           My account
         </Link>
         {isLoggedIn && (
