@@ -1,4 +1,4 @@
-const CreateItem = (props) => {
+const EditItem = (props) => {
   function handleChange(e) {
     const copyItems = JSON.parse(JSON.stringify(props.items));
     const item = copyItems[props.index];
@@ -13,24 +13,44 @@ const CreateItem = (props) => {
         <h3>New Item</h3>
       </div>
       <form onChange={handleChange}>
+        <span>Item Name: </span>
         <input
           type="text"
           value={props.items[props.index].name}
           id="name"
           placeholder="title"
         />
+        <br />
+        <span> Description: </span>
         <input
           type="text"
           value={props.items[props.index].description}
           id="description"
           placeholder="description"
         />
+        <br />
+        <span>Address: </span>
         <input
           type="text"
-          value={props.items[props.index].address}
-          id="address"
-          placeholder="address"
+          value={props.items[props.index].address.street}
+          id="street"
+          placeholder="street"
         />
+        <br />
+        <input
+          type="text"
+          value={props.items[props.index].address.streetNumber}
+          id="streetNumber"
+          placeholder="streetNumber"
+        />
+        <br />
+        <input
+          type="text"
+          value={props.items[props.index].address.postCode}
+          id="postCode"
+          placeholder="postCode"
+        />
+        <br />
         <input
           type="text"
           value={props.items[props.index].picture}
@@ -42,4 +62,4 @@ const CreateItem = (props) => {
   );
 };
 
-export default CreateItem;
+export default EditItem;

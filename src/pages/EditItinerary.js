@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import CreateItem from "./CreateItem";
+import EditItem from "../components/EditItem";
 
-const CreateItinerary = () => {
+const EditItinerary = () => {
+  const { itineraryId } = useParams();
+  const navigate = useNavigate();
+
   const itemTemplate = {
     name: "",
     description: "",
@@ -23,13 +26,22 @@ const CreateItinerary = () => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
+    const getItinerary = async () => {
+      try {
+        const { data } = await service.get(`/itinerary/${itineraryId}`);
+        setInputData(data.itinerary);
+        setItems(data.itineraryDetails || []);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getItinerary();
+  }, [itineraryId]);
+
+  useEffect(() => {
     const getTags = async () => {
       try {
         const { data } = await service.get("/tags");
-        console.log(
-          "The data I am getting for tags after destructuring through the service.get is ",
-          data
-        );
         setTags(data);
       } catch (err) {
         console.error(err);
@@ -48,7 +60,7 @@ const CreateItinerary = () => {
       );
       if (status === 201) {
         console.log("Navigate");
-        Navigate(`/itineraries/${data.newItinerary._id}`);
+        navigate(`/itineraries/${data.newItinerary._id}`);
       }
     } catch (err) {
       console.error(err);
@@ -56,41 +68,47 @@ const CreateItinerary = () => {
   };
 
   const addItemForm = (e) => {
-    e.preventDefault();
-    if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
+    // e.preventDefault();
+    // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
   };
 
   function handleChange(e) {
-    if (e.target.name) {
-      setInputData({ ...inputData, [e.target.name]: e.target.value });
-    }
+    // if (e.target.name) {
+    //   setInputData({ ...inputData, [e.target.name]: e.target.value });
+    // }
   }
 
   return (
     <>
       <div>
-        <h1>New Itinerary</h1>
+        <h1>Edit Itinerary</h1>
       </div>
       <form onSubmit={handleSubmit} onChange={handleChange}>
+        <span>Itinerary Name: </span>
         <input
           type="text"
           value={inputData.name}
           name="name"
           placeholder="title"
         />
+        <br />
+        <span>City: </span>
         <input
           type="text"
           value={inputData.city}
           name="city"
           placeholder="city"
         />
+        <br />
+        <span>Picture: </span>
         <input
           type="text"
           value={inputData.image}
           name="image"
           placeholder="image"
         />
-
+        <br />
+        <span>Tags: </span>
         <select value={inputData.tags} name="tags" id="tags">
           {tags.map((tag) => (
             <option value={tag._id} key={tag._id}>
@@ -98,16 +116,19 @@ const CreateItinerary = () => {
             </option>
           ))}
         </select>
+        <br />
+        <br />
+
         <div>
           {items.map((item, index) => (
-            <CreateItem items={items} setItems={setItems} index={index} />
+            <EditItem items={items} setItems={setItems} index={index} />
           ))}
         </div>
         <button onClick={addItemForm}>Add Item</button>
-        <button type="submit">Submit</button>
+        <button type="submit">Edit</button>
       </form>
     </>
   );
 };
 
-export default CreateItinerary;
+export default EditItinerary;

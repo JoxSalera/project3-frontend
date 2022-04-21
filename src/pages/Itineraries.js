@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import "../components/Itineraries.css";
+import "../pages/Itineraries.css";
 
 const Itineraries = () => {
   const [itineraries, setItineraries] = useState([]);
@@ -34,7 +34,7 @@ const Itineraries = () => {
           {itinerary.tags.map((tag) => {
             return (
               <div className="tagsCard" key={tag._id}>
-                return <span>#{tag.name} </span>;
+                <span>#{tag.name} </span>
               </div>
             );
           })}

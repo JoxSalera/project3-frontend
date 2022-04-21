@@ -10,4 +10,4 @@ const ItineraryHeaderComp = () => {
   );
 };
 
-export default ItineraryHeaderComp;
+export default ItineraryHeader;
