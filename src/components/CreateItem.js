@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-
 const CreateItem = (props) => {
   function handleChange(e) {
     const copyItems = JSON.parse(JSON.stringify(props.items));

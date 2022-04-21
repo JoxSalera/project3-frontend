@@ -12,7 +12,6 @@ const Itineraries = () => {
   useEffect(() => {
     const getItineraries = async () => {
       try {
-
         const q = searchParams.get("q");
         const data = await service.searchItineraries(q);
         console.log(data);
@@ -32,9 +31,11 @@ const Itineraries = () => {
         </Link>
         <p>
           {itinerary.tags.map((tag) => {
-            <div className="tagsCard" key={tag._id}>
-              return <span>#{tag.name} </span>;
-            </div>;
+            return (
+              <div className="tagsCard" key={tag._id}>
+                return <span>#{tag.name} </span>;
+              </div>
+            );
           })}
         </p>
       </div>
