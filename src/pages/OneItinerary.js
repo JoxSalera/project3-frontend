@@ -58,25 +58,29 @@ const ItineraryOne = () => {
     <>
       <div className="itinerary-container">
         <div className="itinerary-header">
-          <h2>{itinerary.itineraryname}</h2>
-          <p>
-            Created by{" "}
-            <Link to={`/profile/${itinerary.creator?._id}`}>
-              {itinerary.creator?.username}
-            </Link>
-          </p>
-          <img src={itinerary.image} alt={itinerary.name}></img>
+          <div className="itinerary-title">
+            <h2>{itinerary.name}</h2>
+            <p>
+              Created by{" "}
+              <Link to={`/profile/${itinerary.creator?._id}`}>
+                {itinerary.creator?.username}
+              </Link>
+            </p>
+          </div>
         </div>
-        <div data-aos="fade-left">
-          <div className="item-container"> {item[0]} </div>
-          {tags}
-
-          <Link to="/">
-            <button>Back to Itineraries</button>
-          </Link>
-          <Link to={`/edit-itinerary/${itineraryId}`}>
-            <button>Edit</button>
-          </Link>
+        <div>
+          <div className="items-container">
+            {item}
+            {tags}
+          </div>
+          <div className="button itinerary-button">
+            <Link to="/">
+              <button>Back to Itineraries</button>
+            </Link>
+            <Link to={`/edit-itinerary/${itineraryId}`}>
+              <button>Edit</button>
+            </Link>
+          </div>
         </div>
       </div>
     </>

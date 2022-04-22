@@ -1,3 +1,7 @@
+:root {
+	--image: ""
+}
+
 .tagsCard {
 	display: flex;
 	flex-direction: row;
@@ -10,6 +14,7 @@
 	justify-content: space-around;
 	align-items: center;
 	align-content: space-evenly;
+	gap: 1rem;
 
 }
 
@@ -32,9 +37,31 @@ div.itemCard .part-right {
 
 .Itineraries {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	width: 200px;;
+	position: relative;
+	flex-direction: column;
+	width: 200px;
+	align-items: center;
+	background-color: #ffffff42;
+	aspect-ratio: 1;
+	justify-content: space-evenly;
+}
+
+/* .Itineraries::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	background-color: black;
+	filter: opacity(.2);
+} */
+.Itineraries p {
+	display: flex;
+	flex-direction: column;
+}
+.Itineraries a {
+	text-decoration: none;
 }
 
 h1 {
@@ -52,6 +79,7 @@ p {
 
 .wrapper {
 	margin: 2rem;
+	margin-top: 4rem;
 }
 
 .create-btn {
