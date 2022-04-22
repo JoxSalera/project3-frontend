@@ -1,0 +1,9 @@
+.ItineraryCard {
+  width: 700px;
+  height: 250px;
+  margin: auto;
+  padding-top: 60px;
+  margin: 20px auto;
+  background-size: cover;
+  cursor: pointer;
+}
