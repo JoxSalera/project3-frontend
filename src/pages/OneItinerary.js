@@ -11,7 +11,7 @@ const ItineraryOne = () => {
 
   const { itineraryId } = useParams();
 
-  // AOS style
+  // AOS animation
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);

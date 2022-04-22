@@ -1,8 +1,74 @@
-/* .Itineraries {
+.tagsCard {
+	display: flex;
+	flex-direction: row;
+}
+
+.ItinerariesList{
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: center;
 	align-content: space-evenly;
-} */
+	background-color: rgb(140, 161, 154);
+	margin-bottom: 2rem;
+	border-radius: 5px;
+}
+
+.Itineraries {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 200px;;
+}
+
+h1 {
+	padding: 2rem;
+}
+
+h3 {
+	color: white;
+}
+
+p {
+	color: black;
+	text-decoration: none;
+}
+
+.wrapper {
+	margin: 2rem;
+}
+
+.create-btn {
+  background-color: #FFFFFF;
+  border: 0;
+  border-radius: .5rem;
+  box-sizing: border-box;
+  color: #111827;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: .875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  padding: .75rem 1rem;
+  text-align: center;
+  text-decoration: none #D1D5DB solid;
+  text-decoration-thickness: auto;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.create-btn:hover {
+  background-color: rgb(249,250,251);
+}
+
+.create-btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.create-btn:focus-visible {
+  box-shadow: none;
+}
