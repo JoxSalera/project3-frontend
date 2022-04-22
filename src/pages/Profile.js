@@ -1,6 +1,7 @@
 import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import "./Profile.css";
 
 const Profile = (props) => {
   // The "{ userId }" must match with name of const variable defined in backend routes ("profile.routes.js")
@@ -52,9 +53,13 @@ const Profile = (props) => {
 
       {itineraries.map((itinerary) => {
         return (
-          <div className="ItineraryCard" key={itinerary._id}>
+          <div
+            className="ItineraryCard"
+            key={itinerary._id}
+            style={{ backgroundImage: `url("${itinerary.image}")` }}
+          >
             <Link to={`/itineraries/${itinerary._id}`}>
-              <img className="PreviewPic" src="/images/paris.jpg" alt="logo" />
+              {/* <img className="PreviewPic" src="/images/paris.jpg" alt="logo" /> */}
             </Link>
             {/* <Link to={`/edit-itinerary/${itinerary._id}`}>
               <button>Edit</button>
@@ -67,7 +72,7 @@ const Profile = (props) => {
             {itinerary.tags.map((tag) => {
               return (
                 <div className="Tags" key={tag.name}>
-                  <p>#{tag.name}</p>
+                  <p className="Tags">#{tag.name}</p>
                 </div>
               );
             })}
