@@ -6,6 +6,7 @@ import AOS from "aos";
 import Button from "../components/Button";
 import "aos/dist/aos.css";
 import "./Itineraries.css";
+import "./OneItinerary.css";
 
 const ItineraryOne = () => {
   const [itineraryItem, setItineraryItem] = useState([]);
@@ -36,12 +37,12 @@ const ItineraryOne = () => {
     <div className="itemCard" key={item._id}>
       <div className="item-info part-left ">
         <h1>{item.name}</h1>
-        <h3>{item.description}</h3>
+        <p className="description-one-itinerary">{item.description}</p>
       </div>
       {/* <h3>{item.address}</h3> */}
 
       <div className="image-container part-right">
-        <img src={item.picture} alt={item.name} />
+        <img className="img-one-itinerary" src={item.picture} alt={item.name} />
       </div>
     </div>
   ));
