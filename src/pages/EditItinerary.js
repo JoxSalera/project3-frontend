@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import EditItem from "../components/EditItem";
 
 const EditItinerary = () => {
   const { itineraryId } = useParams();
