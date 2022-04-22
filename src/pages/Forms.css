@@ -2,7 +2,7 @@
   max-width: 500px;
   padding: 10px 20px;
   background: #f4f7f8;
-  margin: 10px auto;
+  margin: 8rem auto;
   padding: 20px;
   background: #f9efe0;
   border-radius: 8px;
@@ -48,13 +48,13 @@
 
 #btn-1 {
   width: 75%;
-  border: 1px solid #a05216;
-  background: #1abc9c;
+  border: 1px solid #16a085;
+  background: #f4f7f8;
 }
 
 #btn-2 {
   border: 1px solid #16a085;
-  background: #1abc9c;
+  background: #f4f7f8;
 }
 
 #btn-1 p {

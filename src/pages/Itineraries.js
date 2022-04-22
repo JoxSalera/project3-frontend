@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import service from "../api/apiHandler";
 import "./Itineraries.css";
+import Button from "../components/Button";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -37,6 +38,8 @@ const Itineraries = () => {
           backgroundImage: `url("${itinerary.image}")`,
           backgroundPosition: "center",
           backgroundSize: "cover",
+          backgroundBlendMode: "darken",
+          margin: "2rem",
         }}
       >
         <Link to={`/itineraries/${itinerary._id}`}>
@@ -57,7 +60,7 @@ const Itineraries = () => {
 
   return (
     <div className="wrapper">
-      <h1>ITINERARIES</h1>
+      <h1 className="fancy">ITINERARIES</h1>
       <div
         data-aos="fade-down"
         data-aos-easing="linear"
@@ -66,10 +69,7 @@ const Itineraries = () => {
       >
         {allItineraries}
       </div>
-
-      <Link to="/new-itinerary">
-        <button className="create-btn">Create a new Itinerary</button>
-      </Link>
+      <Button text="Create a new Itinerary" path="/new-itinerary"></Button>
     </div>
   );
 };
