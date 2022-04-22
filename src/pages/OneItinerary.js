@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import service from "../api/apiHandler";
 import { Link, useParams } from "react-router-dom";
 import AOS from "aos";
+import Button from "../components/Button";
 import "aos/dist/aos.css";
 import "./Itineraries.css";
 
@@ -74,12 +75,11 @@ const ItineraryOne = () => {
             {tags}
           </div>
           <div className="button itinerary-button">
-            <Link to="/">
-              <button>Back to Itineraries</button>
-            </Link>
-            <Link to={`/edit-itinerary/${itineraryId}`}>
-              <button>Edit</button>
-            </Link>
+            <Button text="Back to Itineraries" path="/"></Button>
+            <Button
+              text="Edit"
+              path={`/edit-itinerary/${itineraryId}`}
+            ></Button>
           </div>
         </div>
       </div>
