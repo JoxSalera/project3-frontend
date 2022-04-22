@@ -2,9 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import service from "../api/apiHandler";
 import { Link, useParams } from "react-router-dom";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import "./Itineraries.css";
 
 const ItineraryOne = () => {
   const [itineraryItem, setItineraryItem] = useState([]);
@@ -12,18 +9,13 @@ const ItineraryOne = () => {
 
   const { itineraryId } = useParams();
 
-  // AOS animation
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
-
   useEffect(() => {
     const getItinerary = async () => {
       try {
         const { data } = await service.get(`/itinerary/${itineraryId}`);
         setItineraryItem(data.itineraryDetails);
+        console.log(data);
         setItinerary(data.itinerary);
-        console.log(data.itinnerary, "la data reçu");
       } catch (err) {
         console.error(err);
       }
@@ -33,17 +25,13 @@ const ItineraryOne = () => {
 
   const item = itineraryItem.map((item) => (
     <div className="itemCard" key={item._id}>
-      <div className="item-info part-left ">
-        <h1>{item.name}</h1>
-        <h3>{item.description}</h3>
-      </div>
+      <h1>{item.name}</h1>
+      <h3>{item.description}</h3>
       {/* <h3>{item.address}</h3> */}
-
-      <div className="image-container part-right">
-        <img src={item.picture} alt={item.name} />
-      </div>
+      <h3>{item.picture}</h3>
     </div>
   ));
+
   const tags = itinerary?.tags
     ? itinerary.tags.map((tag) => {
         return (
@@ -58,25 +46,29 @@ const ItineraryOne = () => {
     <>
       <div className="itinerary-container">
         <div className="itinerary-header">
-          <h2>{itinerary.itineraryname}</h2>
-          <p>
-            Created by{" "}
-            <Link to={`/profile/${itinerary.creator?._id}`}>
-              {itinerary.creator?.username}
-            </Link>
-          </p>
-          <img src={itinerary.image} alt={itinerary.name}></img>
+          <div className="itinerary-title">
+            <h2>{itinerary.name}</h2>
+            <p>
+              Created by{" "}
+              <Link to={`/profile/${itinerary.creator?._id}`}>
+                {itinerary.creator?.username}
+              </Link>
+            </p>
+          </div>
         </div>
-        <div data-aos="fade-left">
-          <div className="item-container"> {item[0]} </div>
-          {tags}
-
-          <Link to="/">
-            <button>Back to Itineraries</button>
-          </Link>
-          <Link to={`/edit-itinerary/${itineraryId}`}>
-            <button>Edit</button>
-          </Link>
+        <div>
+          <div className="items-container">
+            {item}
+            {tags}
+          </div>
+          <div className="button itinerary-button">
+            <Link to="/">
+              <button>Back to Itineraries</button>
+            </Link>
+            <Link to={`/edit-itinerary/${itineraryId}`}>
+              <button>Edit</button>
+            </Link>
+          </div>
         </div>
       </div>
     </>

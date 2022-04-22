@@ -10,6 +10,21 @@
 	justify-content: space-around;
 	align-items: center;
 	align-content: space-evenly;
+
+}
+
+div.itemCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+div.itemCard .part-left {
+  flex: 2;
+}
+
+div.itemCard .part-right {
+  flex: 1;
 	background-color: rgb(140, 161, 154);
 	margin-bottom: 2rem;
 	border-radius: 5px;
