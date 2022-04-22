@@ -1,6 +1,8 @@
 import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import Button from "../components/Button";
+import "../pages/Itineraries.css";
 import "./Profile.css";
 
 const Profile = (props) => {
@@ -62,12 +64,6 @@ const Profile = (props) => {
             <Link to={`/itineraries/${itinerary._id}`}>
               {/* <img className="PreviewPic" src="/images/paris.jpg" alt="logo" /> */}
             </Link>
-            {/* <Link to={`/edit-itinerary/${itinerary._id}`}>
-              <button>Edit</button>
-            </Link> */}
-            <button onClick={handleRemoveItinerary} id={itinerary._id}>
-              Delete
-            </button>
             <h3>"{itinerary.name}"</h3>
             <h3>{itinerary.city}</h3>
             {itinerary.tags.map((tag) => {
@@ -77,11 +73,18 @@ const Profile = (props) => {
                 </div>
               );
             })}
+            <button
+              className="create-btn"
+              onClick={handleRemoveItinerary}
+              id={itinerary._id}
+            >
+              Delete
+            </button>
           </div>
         );
       })}
       <Link to="/">
-        <button>Back to Itineraries</button>
+        <button className="create-btn">Back to Itineraries</button>
       </Link>
     </div>
   );

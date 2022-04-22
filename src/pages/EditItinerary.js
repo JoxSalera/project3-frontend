@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import { Link } from "react-router-dom";
-
 
 const EditItinerary = () => {
   const { itineraryId } = useParams();
@@ -82,10 +80,8 @@ const EditItinerary = () => {
         `/edit-itinerary/${itineraryId}`,
         itineraryToEdit
       );
-      if (status === 201) {
-        console.log("Navigate");
-        navigate(`/itineraries/${itineraryId}`);
-      }
+      console.log("Navigate");
+      navigate(`/itineraries/${itineraryId}`);
     } catch (err) {
       console.error(err);
     }
@@ -135,9 +131,7 @@ const EditItinerary = () => {
           </select>
           <br />
           <br />
-          <Link to="/">
-            <button type="submit">Edit</button>
-          </Link>
+          <button type="submit">Edit</button>
         </form>
       </div>
     </>
