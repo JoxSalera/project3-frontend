@@ -18,6 +18,10 @@
 
 }
 
+span {
+	color: white;
+}
+
 div.itemCard {
   display: flex;
   flex-direction: row;
@@ -43,7 +47,7 @@ div.itemCard .part-right {
 	align-items: center;
 	background-color: #ffffff42;
 	aspect-ratio: 3/5;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	border-radius: 5px;
 }
 

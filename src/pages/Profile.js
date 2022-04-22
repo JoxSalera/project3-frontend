@@ -1,7 +1,6 @@
 import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { DeleteItinerary } from "./DeleteItinerary";
 
 const Profile = (props) => {
   // The "{ userId }" must match with name of const variable defined in backend routes ("profile.routes.js")
@@ -9,7 +8,6 @@ const Profile = (props) => {
   const [user, setUser] = useState();
   const [deleted, setDeleted] = useState(false);
   const [itineraries, setItineraries] = useState();
-  const storedToken = localStorage.getItem("authToken");
   const handleRemoveItinerary = async (e) => {
     const response = await service.delete(`/delete-itinerary/${e.target.id}`);
     setDeleted(true);
@@ -17,6 +15,7 @@ const Profile = (props) => {
   };
 
   useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
     const fetchUsers = async () => {
       try {
         // manually sending token to backend
@@ -42,7 +41,7 @@ const Profile = (props) => {
     } else {
       fetchUsers();
     }
-  }, [userId, deleted]);
+  }, [userId, deleted, props.self]);
 
   if (!user) {
     return <div>Loading...</div>;
