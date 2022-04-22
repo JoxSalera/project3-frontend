@@ -5,6 +5,7 @@ import "./Profile.css";
 
 const Profile = (props) => {
   // The "{ userId }" must match with name of const variable defined in backend routes ("profile.routes.js")
+  //HELLO
   const { userId } = useParams();
   const [user, setUser] = useState();
   const [deleted, setDeleted] = useState(false);
@@ -61,9 +62,9 @@ const Profile = (props) => {
             <Link to={`/itineraries/${itinerary._id}`}>
               {/* <img className="PreviewPic" src="/images/paris.jpg" alt="logo" /> */}
             </Link>
-            <Link to={`/edit-itinerary/${itinerary._id}`}>
+            {/* <Link to={`/edit-itinerary/${itinerary._id}`}>
               <button>Edit</button>
-            </Link>
+            </Link> */}
             <button onClick={handleRemoveItinerary} id={itinerary._id}>
               Delete
             </button>
