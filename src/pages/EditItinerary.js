@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import service from "../api/apiHandler";
-import EditItem from "../components/EditItem";
+import { Link } from "react-router-dom";
 
 const EditItinerary = () => {
   const { itineraryId } = useParams();
@@ -77,7 +77,7 @@ const EditItinerary = () => {
       };
       console.log(itineraryToEdit, "heeeeeeeeeey");
 
-      const { data, status } = await service.put(
+      const { status } = await service.put(
         `/edit-itinerary/${itineraryId}`,
         itineraryToEdit
       );
@@ -94,52 +94,51 @@ const EditItinerary = () => {
     if (e.target.name) {
       setInputData({ ...inputData, [e.target.name]: e.target.value });
     }
-    const addItemForm = (e) => {
-      // e.preventDefault();
-      // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
-    };
   }
   return (
     <>
-      <div>
+      <div className="form-style-5">
         <h1>Edit Itinerary</h1>
+        <form onSubmit={handleSubmit} onChange={handleChange}>
+          <label>Itinerary Name: </label>
+          <input
+            type="text"
+            value={inputData.name}
+            name="name"
+            placeholder="title"
+          />
+
+          <label>City: </label>
+          <input
+            type="text"
+            value={inputData.city}
+            name="city"
+            placeholder="city"
+          />
+
+          <label>Picture: </label>
+          <input
+            type="text"
+            value={inputData.image}
+            name="image"
+            placeholder="image"
+          />
+
+          <label>Tags: </label>
+          <select value={inputData.tags} name="tags" id="tags">
+            {tags.map((tag) => (
+              <option value={tag._id} key={tag._id}>
+                {tag.name}
+              </option>
+            ))}
+          </select>
+          <br />
+          <br />
+          <Link to="/">
+            <button type="submit">Edit</button>
+          </Link>
+        </form>
       </div>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <span>Itinerary Name: </span>
-        <input
-          type="text"
-          value={inputData.name}
-          name="name"
-          placeholder="title"
-        />
-        <br />
-        <span>City: </span>
-        <input
-          type="text"
-          value={inputData.city}
-          name="city"
-          placeholder="city"
-        />
-        <br />
-        <span>Picture: </span>
-        <input
-          type="text"
-          value={inputData.image}
-          name="image"
-          placeholder="image"
-        />
-        <br />
-        <span>Tags: </span>
-        <select value={inputData.tags} name="tags" id="tags">
-          {tags.map((tag) => (
-            <option value={tag._id} key={tag._id}>
-              {tag.name}
-            </option>
-          ))}
-        </select>
-        <br />
-        <br />
-      </form>
     </>
   );
 };
