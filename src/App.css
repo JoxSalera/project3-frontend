@@ -8,6 +8,10 @@
   font-family: 'Nunito', sans-serif;
 }
 
+body {
+  background-color: #757C75;
+}
+
 .App {
   text-align: center;
 }
