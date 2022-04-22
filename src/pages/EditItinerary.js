@@ -140,10 +140,17 @@ const EditItinerary = () => {
         <br />
         <br />
 
+
+    return (
+      <>
+        <div className="form-style-5">
+          <h1>Edit Itinerary</h1>
+
         <div>
           {items.map((item, index) => (
             <EditItem items={items} setItems={setItems} index={index} />
           ))}
+
         </div>
         {/* <button onClick={addItemForm}>Add Item</button> */}
         <button type="submit">Edit</button>

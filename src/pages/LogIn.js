@@ -42,7 +42,7 @@ const LogIn = () => {
   };
 
   return (
-    <div className="LoginPage">
+    <div className="LoginPage form-style-5">
       <h1>Login</h1>
 
       <form onSubmit={handleLoginSubmit}>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "../api/apiHandler";
 import CreateItem from "../components/CreateItem";
+import "./Forms.css";
 
 const CreateItinerary = () => {
   const navigate = useNavigate();
@@ -94,44 +95,50 @@ const CreateItinerary = () => {
 
   return (
     <>
-      <div>
-        <h1>New Itinerary</h1>
-      </div>
-      <form onSubmit={handleSubmit} onChange={handleChange}>
-        <input
-          type="text"
-          value={inputData.name}
-          name="name"
-          placeholder="title"
-        />
-        <input
-          type="text"
-          value={inputData.city}
-          name="city"
-          placeholder="city"
-        />
-        <input
-          type="text"
-          value={inputData.image}
-          name="image"
-          placeholder="image"
-        />
-
-        <select value={inputData.tags} name="tags" id="tags">
-          {tags.map((tag) => (
-            <option value={tag._id} key={tag._id}>
-              {tag.name}
-            </option>
-          ))}
-        </select>
+      <div className="form-style-5">
         <div>
-          {items.map((item, index) => (
-            <CreateItem items={items} setItems={setItems} index={index} />
-          ))}
+          <h1>Create your Express Itinerary</h1>
         </div>
-        <button onClick={addItemForm}>Add Item</button>
-        <button type="submit">Submit</button>
-      </form>
+        <form onSubmit={handleSubmit} onChange={handleChange}>
+          <input
+            type="text"
+            value={inputData.name}
+            name="name"
+            placeholder="Title (ie: Family week-end in Paris)"
+          />
+          <input
+            type="text"
+            value={inputData.city}
+            name="city"
+            placeholder="Which city did you visit?"
+          />
+          <input
+            type="text"
+            value={inputData.image}
+            name="image"
+            placeholder="Add an image"
+          />
+
+          <select value={inputData.tags} name="tags" id="tags">
+            {tags.map((tag) => (
+              <option value={tag._id} key={tag._id}>
+                {tag.name}
+              </option>
+            ))}
+          </select>
+          <div>
+            {items.map((item, index) => (
+              <CreateItem items={items} setItems={setItems} index={index} />
+            ))}
+          </div>
+          <button id="btn-1" onClick={addItemForm}>
+            <p>Add an activity</p>
+          </button>
+          <button id="btn-2" type="submit">
+            <p>Create your itinerary</p>
+          </button>
+        </form>
+      </div>
     </>
   );
 };
