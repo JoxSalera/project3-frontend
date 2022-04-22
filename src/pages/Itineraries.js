@@ -30,19 +30,27 @@ const Itineraries = () => {
 
   const allItineraries = itineraries.map((itinerary) => {
     return (
-      <div className="Itineraries" key={itinerary._id}>
+      <div
+        className="Itineraries"
+        key={itinerary._id}
+        style={{
+          backgroundImage: `url("${itinerary.image}")`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
         <Link to={`/itineraries/${itinerary._id}`}>
           <h3>{itinerary.name}</h3>
-          <p>
-            {itinerary.tags.map((tag) => {
-              return (
-                // <div className="tagsCard" key={tag._id}>
-                <span>#{tag.name} </span>
-                // {/* </div> */}
-              );
-            })}
-          </p>
         </Link>
+        <p>
+          {itinerary.tags.map((tag) => {
+            return (
+              // <div className="tagsCard" key={tag._id}>
+              <span>#{tag.name} </span>
+              // {/* </div> */}
+            );
+          })}
+        </p>
       </div>
     );
   });

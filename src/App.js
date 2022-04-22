@@ -10,13 +10,12 @@ import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import IsPrivate from "./components/IsPrivate";
 import IsAnonymous from "./components/IsAnonymous";
-import Layout from "./components/Layout";
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <Routes element={<Layout />}>
+      <Routes>
         <Route path="/" element={<Itineraries />} />
         <Route path="/itineraries/:itineraryId" element={<OneItinerary />} />
         <Route
