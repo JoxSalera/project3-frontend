@@ -6,7 +6,6 @@ import EditItem from "../components/EditItem";
 const EditItinerary = () => {
   const { itineraryId } = useParams();
   const navigate = useNavigate();
-
   const itemTemplate = {
     name: "",
     description: "",
@@ -99,59 +98,65 @@ const EditItinerary = () => {
       // e.preventDefault();
       // if (items.length <= 7) setItems([...items, { ...itemTemplate }]);
     };
+  }
+  return (
+    <>
+      <div>
+        <h1>Edit Itinerary</h1>
+      </div>
+      <form onSubmit={handleSubmit} onChange={handleChange}>
+        <span>Itinerary Name: </span>
+        <input
+          type="text"
+          value={inputData.name}
+          name="name"
+          placeholder="title"
+        />
+        <br />
+        <span>City: </span>
+        <input
+          type="text"
+          value={inputData.city}
+          name="city"
+          placeholder="city"
+        />
+        <br />
+        <span>Picture: </span>
+        <input
+          type="text"
+          value={inputData.image}
+          name="image"
+          placeholder="image"
+        />
+        <br />
+        <span>Tags: </span>
+        <select value={inputData.tags} name="tags" id="tags">
+          {tags.map((tag) => (
+            <option value={tag._id} key={tag._id}>
+              {tag.name}
+            </option>
+          ))}
+        </select>
+        <br />
+        <br />
+
 
     return (
       <>
         <div className="form-style-5">
           <h1>Edit Itinerary</h1>
-        </div>
-        <form onSubmit={handleSubmit} onChange={handleChange}>
-          <span>Itinerary Name: </span>
-          <input
-            type="text"
-            value={inputData.name}
-            name="name"
-            placeholder="title"
-          />
-          <br />
-          <span>City: </span>
-          <input
-            type="text"
-            value={inputData.city}
-            name="city"
-            placeholder="city"
-          />
-          <br />
-          <span>Picture: </span>
-          <input
-            type="text"
-            value={inputData.image}
-            name="image"
-            placeholder="image"
-          />
-          <br />
-          <span>Tags: </span>
-          <select value={inputData.tags} name="tags" id="tags">
-            {tags.map((tag) => (
-              <option value={tag._id} key={tag._id}>
-                {tag.name}
-              </option>
-            ))}
-          </select>
-          <br />
-          <br />
 
-          <div>
-            {items.map((item, index) => (
-              <EditItem items={items} setItems={setItems} index={index} />
-            ))}
-          </div>
-          {/* <button onClick={addItemForm}>Add Item</button> */}
-          <button type="submit">Edit</button>
-        </form>
-      </>
-    );
-  }
+        <div>
+          {items.map((item, index) => (
+            <EditItem items={items} setItems={setItems} index={index} />
+          ))}
+
+        </div>
+        {/* <button onClick={addItemForm}>Add Item</button> */}
+        <button type="submit">Edit</button>
+      </form>
+    </>
+  );
 };
 
 export default EditItinerary;

@@ -1,13 +1,20 @@
 import service from "../api/apiHandler";
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { DeleteItinerary } from "./DeleteItinerary";
 
 const Profile = (props) => {
   // The "{ userId }" must match with name of const variable defined in backend routes ("profile.routes.js")
   const { userId } = useParams();
   const [user, setUser] = useState();
+  const [deleted, setDeleted] = useState(false);
   const [itineraries, setItineraries] = useState();
   const storedToken = localStorage.getItem("authToken");
+  const handleRemoveItinerary = async (e) => {
+    const response = await service.delete(`/delete-itinerary/${e.target.id}`);
+    setDeleted(true);
+    console.log(response);
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -35,7 +42,7 @@ const Profile = (props) => {
     } else {
       fetchUsers();
     }
-  }, [userId]);
+  }, [userId, deleted]);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -50,9 +57,12 @@ const Profile = (props) => {
             <Link to={`/itineraries/${itinerary._id}`}>
               <img className="PreviewPic" src="/images/paris.jpg" alt="logo" />
             </Link>
-            <Link to={`/edit-itinerary/${itinerary._id}`}>
+            {/* <Link to={`/edit-itinerary/${itinerary._id}`}>
               <button>Edit</button>
-            </Link>
+            </Link> */}
+            <button onClick={handleRemoveItinerary} id={itinerary._id}>
+              Delete
+            </button>
             <h3>"{itinerary.name}"</h3>
             <h3>{itinerary.city}</h3>
             {itinerary.tags.map((tag) => {
