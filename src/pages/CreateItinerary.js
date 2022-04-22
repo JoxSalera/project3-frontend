@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import service from "../api/apiHandler";
 import CreateItem from "../components/CreateItem";
-import "./CreateItinerary.css";
+import "./Forms.css";
 
 const CreateItinerary = () => {
   const navigate = useNavigate();
@@ -132,10 +132,10 @@ const CreateItinerary = () => {
             ))}
           </div>
           <button id="btn-1" onClick={addItemForm}>
-            Add an activity
+            <p>Add an activity</p>
           </button>
           <button id="btn-2" type="submit">
-            Create your itinerary
+            <p>Create your itinerary</p>
           </button>
         </form>
       </div>

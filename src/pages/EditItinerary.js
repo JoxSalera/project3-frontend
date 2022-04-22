@@ -102,7 +102,7 @@ const EditItinerary = () => {
 
     return (
       <>
-        <div>
+        <div className="form-style-5">
           <h1>Edit Itinerary</h1>
         </div>
         <form onSubmit={handleSubmit} onChange={handleChange}>
