@@ -23,7 +23,7 @@ const SearchBar = () => {
       <input
         className="search-bar"
         type="text"
-        placeholder="      Search location"
+        placeholder=" Search location"
         onChange={handleChange}
         value={searchTerm}
       ></input>

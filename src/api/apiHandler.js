@@ -1,9 +1,8 @@
 import axios from "axios";
-
-console.log(process.env.REACT_APP_BACKEND_URL);
+import { API_URL } from "../consts";
 
 const service = axios.create({
-  baseURL: process.env.REACT_APP_BACKEND_URL,
+  baseURL: API_URL,
   withCredentials: true,
 });
 

@@ -18,6 +18,10 @@
 
 }
 
+span {
+	color: white;
+}
+
 div.itemCard {
   display: flex;
   flex-direction: row;
@@ -42,8 +46,9 @@ div.itemCard .part-right {
 	width: 200px;
 	align-items: center;
 	background-color: #ffffff42;
-	aspect-ratio: 1;
-	justify-content: space-evenly;
+	aspect-ratio: 3/5;
+	justify-content: space-between;
+	border-radius: 5px;
 }
 
 /* .Itineraries::before {
@@ -66,10 +71,39 @@ div.itemCard .part-right {
 
 h1 {
 	padding: 2rem;
+	color: white;
+	
 }
 
+/* .fancy {
+  line-height: 0.5;
+  text-align: center;
+}
+.fancy h1 {
+  display: inline-block;
+  position: relative;  
+}
+.fancy h1:before,
+.fancy h1:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  top: 0;
+  width: 600px;
+}
+.fancy h1:before {
+  right: 100%;
+  margin-right: 15px;
+}
+.fancy h1:after {
+  left: 100%;
+  margin-left: 15px;
+} */
+
 h3 {
-	color: white;
+	color: black;
 }
 
 p {
@@ -79,10 +113,15 @@ p {
 
 .wrapper {
 	margin: 2rem;
-	margin-top: 4rem;
+	margin-top: 7rem;
+}
+
+.space-btn {
+	margin-top: 3rem;
 }
 
 .create-btn {
+	
   background-color: #FFFFFF;
   border: 0;
   border-radius: .5rem;
